@@ -1,0 +1,86 @@
+安装所需依赖
+
+javasdk要21版本
+ndk
+CMake 3.28
+自行安装ninja
+ninja构建
+git clone https://github.com/ninja-build/ninja.git ; cd ninja
+git checkout release
+python configure.py --bootstrap
+
+# 克隆代码 
+原仓库
+git clone https://github.com/LSPosed/LSPosed.git
+自己的仓库
+git clone -b tianxun https://github.com/tianxun666/LSPosed.git
+git clone https://github.com/tianxun666/LSPosed.git
+# 进入项目目录
+
+cd LSPosed
+git submodule update --init --recursive
+# 整体构建
+cmd命令
+cls && ./gradlew clean zipAll
+powershell命令
+cls ;./gradlew clean zipAll
+
+cmd一键命令
+git clone -b tianxun https://github.com/tianxun666/LSPosed.git && cd LSPosed && git submodule update --init --recursive && cls && ./gradlew clean zipAll
+powershell 一键命令
+git clone -b tianxun https://github.com/tianxun666/LSPosed.git;cd LSPosed;git submodule update --init --recursive;cls ;./gradlew clean zipAll
+
+zipAll
+zipRiruDebug
+zipRiruRelease
+zipZygiskDebug
+zipZygiskRelease
+
+git config --global user.email "1909619541@qq.com"
+git config --global user.name "tianxun666"
+
+
+
+
+下面不用看没用
+
+
+CD external
+$Env:http_proxy="http://127.0.0.1:7890";$Env:https_proxy="http://127.0.0.1:7890"
+git clone https://github.com/topjohnwu/libcxx.git
+git clone https://github.com/LSPosed/Dobby.git
+git clone https://github.com/fmtlib/fmt.git
+git clone https://github.com/LSPosed/LSPlant.git
+xcopy /s /e libcxx cxx
+Remove-Item -Recurse -Force libcxx
+
+cd ./lsplant/lsplant/src/main/jni/external
+git clone https://github.com/LSPosed/DexBuilder.git
+xcopy /s /e DexBuilder dex_builder
+Remove-Item -Recurse -Force DexBuilder
+cd ./dex_builder\external
+git clone https://github.com/greg7mdp/parallel-hashmap.git
+xcopy /s /e parallel-hashmap parallel_hashmap
+Remove-Item -Recurse -Force parallel-hashmap
+
+ cd ../../../../../../../../../
+
+mkdir libxposed && cd libxposed
+git clone https://github.com/libxposed/api.git
+git clone https://github.com/libxposed/service.git
+
+# 构建依赖
+cd libxposed
+cd api
+./gradlew publishToMavenLocal
+cd../service
+./gradlew publishToMavenLocal
+
+# 整体构建
+cmd命令
+cls && ./gradlew clean zipAll
+powershell命令
+cls ;./gradlew clean zipAll
+错误日志
+SDK location not found. Define a valid SDK location with an ANDROID_HOME environment variable or by setting the sdk.dir path in your project's local properties file at 'D:\tianxun\lsposed\LSPosed\libxposed\api\local.properties'.
+这个就是没有安卓sdk可以通过local.properties进行指定或者在环境变量里面设置
